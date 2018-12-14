@@ -14,11 +14,6 @@
   (wrapped     false))
 
 (rule
-  (targets opamVersion.ml)
-  (deps    (:input opamVersion.ml.in) (:script ../../shell/subst_var.ml) ../../config.status)
-  (action  (with-stdout-to %{targets} (run ocaml %{script} PACKAGE_VERSION "<error>" %{input}))))
-
-(rule
   (targets opamCoreConfig.ml)
-  (deps    (:input opamCoreConfig.ml.in) (:script ../../shell/subst_var.ml) ../../config.status)
+  (deps    (:input opamCoreConfig.ml.in) (:script ../../shell/subst_var.ml))
   (action  (with-stdout-to %{targets} (run ocaml %{script} DEVELOPER false %{input}))))
