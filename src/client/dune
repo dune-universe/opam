@@ -2,7 +2,7 @@
   (name        opam_client)
   (public_name opam-client)
   (synopsis    "OCaml Package Manager client and CLI library")
-  (modules     (:standard \ opamMain opamManifest get-git-version))
+  (modules     (:standard \ opamMain get-git-version))
   (libraries   opam-state opam-solver re cmdliner)
   (flags       (:standard
                (:include ../ocaml-flags-standard.sexp)
@@ -13,22 +13,12 @@
   (name        opamMain)
   (public_name opam)
   (package     opam)
-  (modules     opamMain opamManifest)
+  (modules     opamMain)
   (flags       (:standard
                (:include ../ocaml-flags-standard.sexp)
                (:include ../ocaml-context-flags.sexp)
                (:include linking.sexp)))
-  (link_flags  (:include manifest.sexp))
   (libraries   opam-client))
-
-(rule
-  (targets manifest.sexp)
-  (deps    (:script ../../shell/subst_var.ml) ../../config.status (:input manifest.sexp.in))
-  (action  (with-stdout-to %{targets} (run ocaml %{script} CONF_MANIFEST_O "" %{input}))))
-
-(include opamManifest.inc)
-
-(include manifest.inc)
 
 (rule
   (targets git-sha)
