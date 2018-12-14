@@ -1,6 +1,6 @@
 (rule
   (targets ocaml-flags-standard.sexp)
-  (deps    (:input ocaml-flags-standard.sexp.in) (:script ../shell/subst_var.ml) ../config.status)
+  (deps    (:input ocaml-flags-standard.sexp.in) (:script ../shell/subst_var.ml))
   (action (with-stdout-to %{targets} (run ocaml %{script} CONF_OCAMLFLAGS "" %{input}))))
 
 (rule
