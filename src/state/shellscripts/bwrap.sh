@@ -7,7 +7,7 @@ if ! command -v bwrap >/dev/null; then
     echo "disable sandboxing in ${OPAMROOT:-~/.opam}/config at your own risk." >&2
     echo "See https://github.com/projectatomic/bubblewrap for bwrap details." >&2
     echo "For 'bwrap' use in opam, see the FAQ:" >&2
-    echo "  https://opam.ocaml.org/doc/2.0/FAQ.html#Why-does-opam-require-bwrap" >&2
+    echo "  https://opam.ocaml.org/doc/FAQ.html#Why-does-opam-require-bwrap" >&2
     exit 10
 fi
 
@@ -73,6 +73,12 @@ add_ccache_mount() {
   fi
 }
 
+add_dune_cache_mount() {
+  DUNE_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/dune
+  mkdir -p ${DUNE_CACHE}
+  add_mounts rw $DUNE_CACHE
+ }
+
 # This case-switch should remain identical between the different sandbox implems
 COMMAND="$1"; shift
 case "$COMMAND" in
@@ -84,6 +90,7 @@ case "$COMMAND" in
         add_mounts ro "$OPAM_SWITCH_PREFIX"
         add_mounts rw "$PWD"
         add_ccache_mount
+        add_dune_cache_mount
         ;;
     install)
         # mount unusual path in ro
