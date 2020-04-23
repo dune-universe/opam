@@ -30,10 +30,10 @@ build: [
 ]
 dev-repo: "git+https://github.com/dune-universe/opam.git"
 url {
-  src: "git://github.com/dune-universe/opam.git#duniverse-2.0.6"
+  src: "git://github.com/dune-universe/opam.git#duniverse-2.0.7"
 }
 description:"""
-opam 2.0 development libraries
+Opam 2.0 development libraries
 
 Small standard library extensions, and generic system interaction modules used
 by opam.

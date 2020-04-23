@@ -30,7 +30,7 @@ module Set = OpamStd.Set.Make(O)
 
 module Map = OpamStd.Map.Make(O)
 
-let current_raw = "2.0.6"
+let current_raw = "2.0.7"
 
 let current = of_string current_raw
 
